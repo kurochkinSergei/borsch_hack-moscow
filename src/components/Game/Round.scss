@@ -63,7 +63,10 @@
     width: 400px;
     margin: 0 0 25px 25px;
     & > label {
-      margin-right: 25px
+      margin-right: 25px;
+      & input {
+        font-size: 32px;
+      }
     }
   }
 
@@ -95,6 +98,37 @@
       &:first-child {
         right: 0;
       }
+    }
+  }
+
+  .result {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    margin: 20px;
+    margin-top: 0;
+
+    .answers {
+      display: flex;
+      justify-content: space-between;
+      font-size: 24px;
+    }
+
+    .correct {
+      font-size: 32px;
+      text-align: center;
+      color: white;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+
+      > button {
+        margin-left: 25px;
+      }
+    }
+
+    .right {
+      color: rgb(18,152,2);
     }
   }
 }

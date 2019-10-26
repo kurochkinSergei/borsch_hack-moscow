@@ -18,7 +18,11 @@ type TScore = {
 
 const officials = [
   // { id: 8, office: 14, year: 2010 }
-  { id: 9, office: 14, year: 2010 }
+  { id: 10, office: 14, year: 2010 },
+  { id: 8, office: 14, year: 2010 },
+  { id: 9, office: 14, year: 2010 },
+  { id: 11, office: 14, year: 2010 },
+  { id: 12, office: 14, year: 2010 }
 ];
 
 export type TDataPrepared = {
@@ -45,6 +49,7 @@ const Game = () => {
   const [round, setRound] = useState<number>(1);
   const [roundStarted, startRound] = useState<boolean>(false);
   const [officialData, setOfficialData] = useState<TDataPrepared | null>(null);
+  const [rawData, setRawData] = useState<TDataPrepared | null>(null);
   const [score, setScore] = useState<TScore>({
     user: 0,
     machine: 0,
@@ -53,7 +58,7 @@ const Game = () => {
   useEffect(() => {
     getOfficialInfo(officials[round - 1]).then(
       (result) => {
-        console.log('RESULT:::', result);
+        setRawData(result)
         setOfficialData(prepareData(result));
       }
     );
@@ -73,8 +78,8 @@ const Game = () => {
             }}
             className="Mono_14-24_White"
           >
-            <HealthBar score={score.user} name="Player 1" player={1} />
-            <HealthBar score={score.machine} name="FEDOR THE MACHINE" player={2}/>
+            <HealthBar score={score.machine} name="Player 1" player={1} />
+            <HealthBar score={score.user} name="FEDOR THE LEARNED MACHINE" player={2}/>
             ROUND {round}
           </div>}
         />
@@ -96,7 +101,13 @@ const Game = () => {
           </>
         : <Round
           data={officialData}
-          setRound={setRound}
+          setRound={() => {
+            setRound(round + 1)
+            startRound(false);
+          }}
+          rawData={rawData}
+          // @ts-ignore
+          setScore={(key: string) => setScore({...score, [key]: (score[key] + 1) }) }
           />
         }
         </>

@@ -53,16 +53,16 @@
     &.bar-p2:before { width: 0% }
   }
   &.score-1 {
-    &.bar-p1:before { width: 20% }
-    &.bar-p2:before { width: 20% }
+    &.bar-p1:before { width: 33.3% }
+    &.bar-p2:before { width: 33.3% }
   }
   &.score-2 {
-    &.bar-p1:before { width: 40% }
-    &.bar-p2:before { width: 40% }
+    &.bar-p1:before { width: 66.6% }
+    &.bar-p2:before { width: 66.6% }
   }
   &.score-3 {
-    &.bar-p1:before { width: 60% }
-    &.bar-p2:before { width: 60% }
+    &.bar-p1:before { width: 100% }
+    &.bar-p2:before { width: 100% }
   }
   &.score-4 {
     &.bar-p1:before { width: 80% }

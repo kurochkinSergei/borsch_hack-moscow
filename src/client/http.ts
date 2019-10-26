@@ -19,7 +19,7 @@ export function authWithGoogle(credentials: any) {
     .catch(err => console.error(err));
 }
 
-export function getOfficialInfo({ id, office, year }: { id: number, office: number, year: number }) {
+export function getOfficialInfo({ id, office, year }: { id: number, office?: number, year?: number }) {
   return axios
     .get(`https://declarator.org/api/v1/search/sections/?person=${id}&office=${office}&year=${year}`)
     .then(response => _get(response.data, 'results[0]', null))
@@ -28,3 +28,14 @@ export function getOfficialInfo({ id, office, year }: { id: number, office: numb
       return _get(person, 'results[0]', null);
     });
 }
+
+export function requestScore(data: any) {
+  return axios
+    .post(`http://134.209.94.143:5000/score`, data)
+    .then(response => _get(response, 'data', null))
+    // .then(response => _get(response.data, 'results[0]', null))
+    .catch(err => {
+      console.log('err', err)
+      // return _get(person, 'results[0]', null);
+    });
+} 

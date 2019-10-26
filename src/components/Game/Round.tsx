@@ -17,17 +17,19 @@ import prius from '../../static/cars/prius.png';
 // @ts-ignore
 import porsche from '../../static/cars/porsche.webp';
 import estate from '../../static/house.png';
+import { useStorybook } from 'storybook-directual';
+import { requestScore } from 'client/http';
 
 const cars = [
   jiga,
-  jiga,
-  jiga,
-  jiga,
-  jiga,
-  jiga,
-  // niva,
-  prius,
-  porsche,
+  // jiga,
+  // jiga,
+  // jiga,
+  // jiga,
+  // jiga,
+  // // niva,
+  // prius,
+  // porsche,
 ]
 
 const emojies: { [key: string]: any} = {
@@ -39,6 +41,8 @@ const emojies: { [key: string]: any} = {
 interface RoundProps {
   data: TDataPrepared | null,
   setRound: any,
+  setScore: any,
+  rawData: any,
 }
 
 export const getRandomColor = (): { hex: string, name: string } => {
@@ -69,7 +73,7 @@ const makeVehicles = (data: any) => {
 
   return data.vehicles.map((car: any, index: number) => (
     <div className="card">
-      <img className="car-img" src={cars[index]} data-offset={index}></img>
+      <img className="car-img" src={jiga} data-offset={index}></img>
       <div>
       {[
         get(car, 'type.name', ''),
@@ -96,16 +100,41 @@ const makeEstates = (data: any) => {
     ));
 }
 
-const Round: React.FC<RoundProps> = ({ data }) => {
+const Round: React.FC<RoundProps> = ({ data, rawData, setScore, setRound }) => {
   const [color, setColor] = useState<string>('#fff');
+  // pending -> result recieved
   const [roundStatus, setStatus] = useState<string>('pending');
-  const [value, setValue] = useState();
-  // const [roundStarted, startRound] = useState<boolean>(false);
-  // const [officialData, setOfficialData] = useState<TDataPrepared | null>(null);
-  // const [score, setScore] = useState<TScore>({
-  //   user: 0,
-  //   machine: 0,
-  // });
+  const [result, setResult] = useState();
+  const [value, setValue] = useState(0);
+  const { Numbers } = useStorybook();
+
+  const onConfirm = () => {
+    console.log('VALYE::', value);
+    console.log('raw data', rawData);
+
+    requestScore(rawData).then(result => {
+      console.log('result:::', result);
+      const { y_predict, y_true } = result;
+
+      const robotDelta = Math.round((y_predict - y_true) / 1000);
+      const yourDelta = Math.round((value*1000 - y_true) / 1000);
+
+      setResult({
+        y_predict: Math.round(y_predict / 1000),
+        y_true: Math.round(y_true / 1000),
+        robotDelta,
+        yourDelta,
+      });
+
+      setStatus('result');
+      setScore(result.yourDelta <= result.robotDelta ? 'user' : 'machine');
+      //   setRound();
+      // setTimeout(() => {
+      //   setScore('user');
+      //   setRound();
+      // }, 5000);
+    });
+  }
 
   useEffect(() => {
     setColor(getRandomColor().hex);
@@ -114,20 +143,46 @@ const Round: React.FC<RoundProps> = ({ data }) => {
   return (
     <div className="round-wrapper">
       <div className="results">
-        <div className="form">
+        { roundStatus === 'result'
+          && <div className="result wrapper">
+            <div className="correct Header_32-40_White">
+              Correct answer: {Numbers.separate(result.y_true)}K&nbsp;
+              <Button onClick={setRound}>Next round</Button>
+            </div>
+            <div className="answers">
+              <span className={Math.abs(result.yourDelta) <= Math.abs(result.robotDelta) ? 'right' : ''}>
+                Your answer: {Numbers.separate(value)}K&nbsp;
+                ({result.yourDelta < 0 ? '-' : '+'}
+                {Numbers.separate(Math.abs(result.yourDelta))}
+                K)
+              </span>
+              <span className={Math.abs(result.yourDelta) > Math.abs(result.robotDelta) ? 'right' : ''}>
+                FEDOR's answer: {Numbers.separate(result.y_predict)}K&nbsp;({result.robotDelta < 0 ? '-' : '+'}
+                {Numbers.separate(Math.abs(result.robotDelta))}K)
+              </span>
+            </div>
+          </div>
+        }
+        <div className="form" style={roundStatus === 'result' ? { display: 'none' } : undefined}>
           <label>
             <div style={{ color: 'white', margin: '5px 15px'}}>
-              Mounthly income thosusand ₽
+              Mounthly salary {Numbers.separate(value)}K ₽
             </div>
             <Input
               type="number"
               value={value}
-              onChange={(event: any) => setValue(event.target.value)}
+              onChange={(event: any) => {
+                const value = event.target.value;
+                if (value > 10000000) return;
+ 
+                setValue(value)
+              }}
             />
           </label>
-          <Button onClick={() => {}}>
+          
+          {rawData && <Button onClick={onConfirm}>
             Confirm
-          </Button>
+          </Button>}
         </div>
       </div>
       
