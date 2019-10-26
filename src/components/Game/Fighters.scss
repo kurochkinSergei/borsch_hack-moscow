@@ -8,6 +8,16 @@
   to{ right: 100px; } 
 }
 
+.score {
+  top: 170px;
+  text-align: center;
+  color: white;
+  left: calc(50% - 100px);
+  position: absolute;
+  font-size: 48px;
+  width: 200px;
+}
+
 .fight-button {
   position: absolute;
   top: 250px;

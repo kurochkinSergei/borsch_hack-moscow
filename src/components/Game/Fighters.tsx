@@ -6,9 +6,10 @@ import './Fighters.scss';
 import leftF from 'static/scorpion_ultimate.png'
 import rightF from 'static/fedor.png'
 
+
 const Fighters = () => {
   const [startAnimation, setStartAnimation] = useState(false);
- 
+
   useEffect(() => {
     setStartAnimation(true);
   }, []);

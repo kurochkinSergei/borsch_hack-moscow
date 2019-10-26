@@ -1,0 +1,33 @@
+.round-wrapper {
+  & .person {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    & .person-image-wrapper {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      border-radius: 150px;
+      overflow: hidden;
+      border: 5px solid white;
+
+      & .face {
+        font-size: 138px;
+        position: absolute;
+        top: -11px;
+        right: 91px;
+      }
+    }
+    & .person-desc {
+      text-align: center;
+      color: white !important;
+      margin: 10px;
+
+      .person-name, .person-party, .person-region {
+        color: white;
+      }
+    }
+  }
+}
