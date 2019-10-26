@@ -4,7 +4,8 @@ import 'react-typist/dist/Typist.css';
 
 import tuxedo from '../../static/sarkozy.png';
 import simple from '../../static/man-simple.png';
-// import king from '../../static/king.png';
+// @ts-ignore
+import king from '../../static/king.jpg';
 
 import './Round.scss';
 import { colors, Button, Input } from 'storybook-directual';
@@ -30,9 +31,9 @@ const cars = [
 ]
 
 const emojies: { [key: string]: any} = {
-  pending: <span className="face">😐</span>,
-  success: <span className="face">😅</span>,
-  fail: <span className="face">😬</span>
+  simple: <span className="face">😐</span>,
+  tuxedo: <span className="face">😄</span>,
+  king: <span className="face">😊</span>
 }
 
 interface RoundProps {
@@ -49,8 +50,18 @@ export const getRandomColor = (): { hex: string, name: string } => {
 
 const getPersonSrc = (value: number) => {
   if (value < 100000) return simple;
-  if (value > 100000 && value < 200000) return tuxedo;
-  // if (value > 200000) return king;
+  if (value >= 100000 && value < 200000) return tuxedo;
+  if (value > 200000) return king;
+
+  return simple;
+}
+
+const getPersonImgClass = (value: number) => {
+  if (value < 100000) return 'simple';
+  if (value >= 100000 && value < 200000) return 'tuxedo';
+  if (value > 200000) return 'king';
+
+  return 'simple';
 }
 
 const makeVehicles = (data: any) => {
@@ -105,7 +116,9 @@ const Round: React.FC<RoundProps> = ({ data }) => {
       <div className="results">
         <div className="form">
           <label>
-            <div style={{ color: 'white', margin: '5px 15px'}}>Enter public official income</div>
+            <div style={{ color: 'white', margin: '5px 15px'}}>
+              Mounthly income thosusand ₽
+            </div>
             <Input
               type="number"
               value={value}
@@ -121,14 +134,14 @@ const Round: React.FC<RoundProps> = ({ data }) => {
       <div className="person">
         <div>
           <div
-            className="person-image-wrapper"
-            style={{
-              background: color,
-              borderColor: color,
-            }}
+            className={`person-image-wrapper ${getPersonImgClass(value)}`}
+            // style={{
+            //   background: color,
+            //   borderColor: color,
+            // }}
           >
             <img src={getPersonSrc(value)} alt="person"></img>
-            {emojies[roundStatus]}
+            {emojies[getPersonImgClass(value)]}
           </div>
           <div className="person-desc">
             <div className="person-name Additional-Header_28-40_White">{data && data.name}</div>

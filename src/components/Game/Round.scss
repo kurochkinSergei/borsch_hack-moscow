@@ -12,10 +12,36 @@
       overflow: hidden;
       // border: 5px solid white;
 
+      &.simple {
+        > img {
+          width: 230px;
+          position: relative;
+          left: 38px;
+          top: 12px;
+        }
+      }
+
+      &.tuxedo {
+        > img {
+          width: 330px;
+          position: relative;
+          left: 11px;
+          top: 19px;
+        }
+      }
+
+      &.king {
+        > img {
+          width: 320px;
+          position: relative;
+          left: -18px;
+        }
+      }
+
       & .face {
         font-size: 138px;
         position: absolute;
-        top: -11px;
+        top: 5px;
         right: 80px;
       }
     }
