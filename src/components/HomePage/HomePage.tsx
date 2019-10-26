@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Icon, colors } from 'storybook-directual';
+import Typist from 'react-typist';
+import 'react-typist/dist/Typist.css';
+
 import { useIntl } from 'react-intl';
 
 import { useDates } from 'providers/StorybookProvider/withDates';
@@ -32,7 +35,18 @@ const HomePage = () => {
     <PageLayout
       header={(
         <Header
-          title={formatMessage({ id: 'hello' })}
+          title={<Typist
+            startDelay={1000}
+            avgTypingDelay={200}
+            cursor={{
+              show: true,
+              blink: true,
+              element: '|',
+              hideWhenDone: false,
+            }}
+          >
+            <span style={{ color: '#ed1f24'}}>BORSCH</span>&nbsp;TEAM &nbsp;&nbsp;FCK CORRUPTION&nbsp;
+          </Typist>}
           withSearch
           searchPlaceholder="Search"
           onSearch={(value: string) => { console.warn('search:::', value); }}

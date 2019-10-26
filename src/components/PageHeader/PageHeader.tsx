@@ -5,7 +5,7 @@ import './index.scss';
 
 
 interface Props {
-  title: string;
+  title: any;
   withSearch?: boolean;
   searchPlaceholder?: string;
   onSearch?: (value: string) => void;
