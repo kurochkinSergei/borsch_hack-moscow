@@ -1,0 +1,33 @@
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@mixin rotating($duration) {
+  animation: spin $duration linear infinite;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 100px;
+
+  .babai-wrapper {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    @include rotating(7s);
+  
+  
+    & .spin-babai {
+      width: 150px;
+      height: 150px;
+      @include rotating(23s);
+    }
+  }
+}

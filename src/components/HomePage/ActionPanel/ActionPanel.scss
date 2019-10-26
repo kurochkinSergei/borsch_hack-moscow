@@ -1,0 +1,11 @@
+.action-panel {
+  display: flex;
+
+  &__control {
+    margin-right: 8px;
+  }
+
+  .app-filter-select {
+    width: 174px;
+  }
+}
