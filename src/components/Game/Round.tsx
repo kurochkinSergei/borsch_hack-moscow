@@ -8,6 +8,24 @@ import './Round.scss';
 import { colors, Button, Input } from 'storybook-directual';
 import { TDataPrepared } from './Game';
 
+import jiga from '../../static/cars/jiga.png';
+// import niva from '../../static/cars/niva.jpg';
+import prius from '../../static/cars/prius.png';
+// @ts-ignore
+import porsche from '../../static/cars/porsche.webp';
+import estate from '../../static/house.png';
+const cars = [
+  jiga,
+  jiga,
+  jiga,
+  jiga,
+  jiga,
+  jiga,
+  // niva,
+  prius,
+  porsche,
+]
+
 const emojies: { [key: string]: any} = {
   pending: <span className="face">😐</span>,
   success: <span className="face">😅</span>,
@@ -25,6 +43,61 @@ export const getRandomColor = (): { hex: string, name: string } => {
 
   return colors[colorsKeys[colorIndx]];
 };
+
+// const makeEstates = (data: any) => {
+//   if (!data) return '';
+
+//   return data.realEstates.map((flat: any) => 
+//     [
+//       get(flat, 'type.name', ''),
+//       get(flat, 'region.name', ''),
+//       `${get(flat, 'square', '')} square meters`
+//     ].filter(Boolean).join(', '))
+//   .join('; ')
+// }
+
+// const makeVehicles = (data: any) => {
+//   if (!data) return '';
+
+//   return data.vehicles.map((car: any) => 
+//     [
+//       get(car, 'type.name', ''),
+//       get(car, 'brand.name', ''),
+//     ].filter(Boolean).join(', '))
+//   .join('; ')
+// }
+
+const makeVehicles = (data: any) => {
+  if (!data) return '';
+
+  return data.vehicles.map((car: any, index: number) => (
+    <div className="card">
+      <img className="car-img" src={cars[index]} data-offset={index}></img>
+      <div>
+      {[
+        get(car, 'type.name', ''),
+        get(car, 'brand.name', ''),
+      ].filter(Boolean).join(': ')}
+      </div>
+    </div>
+  ));
+}
+
+const makeEstates = (data: any) => {
+  if (!data) return '';
+
+  return data.realEstates.map((flat: any) => 
+    (
+      <div className="card">
+        <img className="car-img" src={estate}></img>
+        <div>
+        {get(flat, 'type.name', '')},{' '}
+        {get(flat, 'region.name', '')},{' '}
+        {get(flat, 'square', '')} m<sup>2</sup>
+        </div>
+      </div>
+    ));
+}
 
 const Round: React.FC<RoundProps> = ({ data }) => {
   const [color, setColor] = useState<string>('#fff');
@@ -65,13 +138,12 @@ const Round: React.FC<RoundProps> = ({ data }) => {
         <div className="info">
           <div className="info-row">
             <div className="title Header_32-40_White">Real estate</div>
-            <div className="images"></div>
-            <div className="desc"></div>
+            <div className="cards">{makeEstates(data)}</div>
           </div>
           <div className="info-row">
             <div className="title Header_32-40_White">Vehicles</div>
-            <div className="images"></div>
-            <div className="desc"></div>
+            <div className="cards">{makeVehicles(data)}</div>
+            {/* <div className="desc">{makeVehicles(data)}</div> */}
           </div>
           {/* <div className="info-row">
             <div className="title">Vehicles</div>

@@ -1,0 +1,75 @@
+
+.bar {
+  position: absolute;
+  width: 400px;
+  height: 40px;
+  font-size: 24px;
+  line-height: 26px;
+  border:solid 1px #fff;
+  background:rgba(0,0,255, 0.6);
+
+  .player-name{
+    position:absolute;
+    padding:5px;
+    color:#fff;
+  }
+}
+
+.bar-p1 {
+  left: 25px;
+
+  &:before{
+    position:absolute;
+    content:'';
+    background:rgba(255,0,0,0.8);
+    height: 40px;
+    right:0;
+  }
+}
+
+.bar-p2 {
+  right: 25px;
+
+  .player-name{
+    right:0;
+  }
+
+  .speed{
+    right:0;
+  }
+
+  &:before{
+    position: absolute;
+    content:'';
+    background:rgba(255,0,0,0.8);
+    height: 40px;
+    left: 0;
+  }
+}
+
+.bar {
+  &.score-0 {
+    &.bar-p1:before { width: 0% }
+    &.bar-p2:before { width: 0% }
+  }
+  &.score-1 {
+    &.bar-p1:before { width: 20% }
+    &.bar-p2:before { width: 20% }
+  }
+  &.score-2 {
+    &.bar-p1:before { width: 40% }
+    &.bar-p2:before { width: 40% }
+  }
+  &.score-3 {
+    &.bar-p1:before { width: 60% }
+    &.bar-p2:before { width: 60% }
+  }
+  &.score-4 {
+    &.bar-p1:before { width: 80% }
+    &.bar-p2:before { width: 80% }
+  }
+  &.score-5 {
+    &.bar-p1:before { width: 100% }
+    &.bar-p2:before { width: 100% }
+  }
+}

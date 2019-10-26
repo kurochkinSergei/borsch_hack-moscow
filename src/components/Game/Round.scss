@@ -10,7 +10,7 @@
       height: 300px;
       border-radius: 150px;
       overflow: hidden;
-      border: 5px solid white;
+      // border: 5px solid white;
 
       & .face {
         font-size: 138px;
@@ -42,10 +42,30 @@
 
   .info {
     margin-left: 20px;
+    color: white;
+
     .info-row {
       margin-bottom: 15px;
       .title {
         color: white;
+      }
+    }
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+
+      & .card {
+        width: 160px;
+        margin-right: 10px;
+      }
+    }
+    .car-img {
+      width: 160px;
+      position: relative;
+      // right: calc(attr(data-offset, 1) * 60px);
+
+      &:first-child {
+        right: 0;
       }
     }
   }

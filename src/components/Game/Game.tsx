@@ -7,6 +7,7 @@ import Header from '../PageHeader/PageHeader';
 
 import { Button } from 'storybook-directual';
 import Fighters from './Fighters';
+import HealthBar from '../HealthBar/HealthBar';
 import Round from './Round';
 import { getOfficialInfo } from 'client/http';
 
@@ -16,7 +17,8 @@ type TScore = {
 }
 
 const officials = [
-  { id: 8, office: 14, year: 2010 }
+  // { id: 8, office: 14, year: 2010 }
+  { id: 9, office: 14, year: 2010 }
 ];
 
 export type TDataPrepared = {
@@ -71,6 +73,8 @@ const Game = () => {
             }}
             className="Mono_14-24_White"
           >
+            <HealthBar score={score.user} name="Player 1" player={1} />
+            <HealthBar score={score.machine} name="FEDOR THE MACHINE" player={2} />
             ROUND {round}
           </div>}
         />
