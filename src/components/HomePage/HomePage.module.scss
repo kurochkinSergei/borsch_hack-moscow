@@ -21,13 +21,12 @@
     width: 500px;
     height: 500px;
     display: flex;
-    @include rotating(7s);
-  
-  
-    & .spin-babai {
-      width: 150px;
-      height: 150px;
-      @include rotating(23s);
-    }
+    @include rotating(7s);  
   }
+}
+
+.spin-babai {
+  width: 150px;
+  height: 150px;
+  @include rotating(23s);
 }

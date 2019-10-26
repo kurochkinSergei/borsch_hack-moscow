@@ -1,5 +1,5 @@
 import React from 'react';
-import { AccentButton, Select } from 'storybook-directual';
+import { Button, Select } from 'storybook-directual';
 
 import './ActionPanel.scss';
 
@@ -10,22 +10,16 @@ const appFilterOptions = [
 ];
 
 const ActionPanel = () => {
-  const initialValue = new Set([1]);
+  const initialValue = '';
 
   return (
     <div className="action-panel">
-      <AccentButton
-        className="action-panel__control"
-        onClick={() => { console.log('Do something'); }}
-      >
-        Do something
-      </AccentButton>
-
       <div className="app-filter-select action-panel__control">
         <Select
+          placeholder="Hello there"
           selected={initialValue}
           options={appFilterOptions}
-          onChange={(key: string) => console.log('key::::', key)}
+          onChange={(key: string) => console.warn('key::::', key)}
         />
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 import { UserState, UserActions } from './types';
-import { SET_USER_INFO_TYPE } from './actions';
+import { SET_USER_INFO_TYPE, LOGOUT } from './actions';
 
 const initialState:UserState = {
   info: {},
@@ -15,6 +15,13 @@ const reducer:Reducer<UserState> = (state: UserState = initialState, action: Use
         ...action.payload.user,
       },
       isAuthenticated: true,
+    };
+  }
+  if (action.type === LOGOUT) {
+    return {
+      ...state,
+      info: {},
+      isAuthenticated: false,
     };
   }
   return state;

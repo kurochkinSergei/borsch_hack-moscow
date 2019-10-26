@@ -9,6 +9,7 @@ interface IRoute {
   history: History,
   path: string,
   isAuthenticated: boolean,
+  [key: string]: any,
 }
 
 const PrivateRoute: React.FC<IRoute> = ({

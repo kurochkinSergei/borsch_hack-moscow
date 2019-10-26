@@ -1,19 +1,19 @@
 {
-  "short_name": "Directual web boilerplate",
-  "name": "Directual web boilerplate",
+  "short_name": "Borsch | Hack.Moscow | 2019",
+  "name": "Borsch team | Data Visualization | Hack.Moscow | Transparency",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "mainlogo_hack_moscow.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "favicon.png",
+      "src": "mainlogo_hack_moscow.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "favicon.png",
+      "src": "mainlogo_hack_moscow.png",
       "type": "image/png",
       "sizes": "512x512"
     }	 

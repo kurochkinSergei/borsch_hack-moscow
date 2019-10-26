@@ -1,5 +1,5 @@
-import React from 'react';
-import { Icon } from 'storybook-directual';
+import React, { useEffect, useState } from 'react';
+import { Icon, colors } from 'storybook-directual';
 import { useIntl } from 'react-intl';
 
 import { useDates } from 'providers/StorybookProvider/withDates';
@@ -12,10 +12,21 @@ import ActionPanel from './ActionPanel/ActionPanel';
 
 import styles from './HomePage.module.scss';
 
+interface IBabai {
+  id: number,
+  color: string,
+  name: string,
+}
 
 const HomePage = () => {
   const { formatMessage } = useIntl();
+  const [babais, setBabais] = useState([]);
   const Dates = useDates();
+
+  // upload list of babais
+  useEffect(() => {
+    // getData().then(data => setBabais(data.payload));
+  }, []);
 
   return (
     <PageLayout
@@ -24,7 +35,7 @@ const HomePage = () => {
           title={formatMessage({ id: 'hello' })}
           withSearch
           searchPlaceholder="Search"
-          onSearch={(value: string) => { console.log('search:::', value); }}
+          onSearch={(value: string) => { console.warn('search:::', value); }}
         />
       )}
       sideBar={<SideBar />}
@@ -37,9 +48,17 @@ const HomePage = () => {
           </h2>
 
           <div className={styles.content}>
-            <div className={styles['babai-wrapper']}>
-              <Icon className={styles['spin-babai']} type="babai" />
-            </div>
+            {babais && babais.map((babai: IBabai, index) => (
+              <Icon
+                className={styles['spin-babai']}
+                type="babai"
+                style={{
+                  color: colors[babai.color].hex,
+                  animationDelay: `${index}s`,
+                  animationDirection: index % 2 ? 'normal' : 'reverse',
+                }}
+              />
+            ))}
           </div>
         </>
       )}

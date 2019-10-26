@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   Route,
   Switch,
@@ -11,19 +11,20 @@ import { History } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
 
 // Page components
-import Login from 'components/Login/Login';
 import HomePage from 'components/HomePage/HomePage';
 
+import Login from 'components/Login/Login';
 import PrivateRoute from './PrivateRoute';
-// import { getAuthenticatedStatus } from '../redux/stores/user/getters';
+import { getAuthenticatedStatus } from '../redux/stores/user/getters';
 
 interface IRouter {
   history: History,
 }
 
-// eslint-disable-next-line arrow-body-style
 const AppRouter: React.FC<IRouter> = ({ history }) => {
   // const isAuthenticated = useSelector(getAuthenticatedStatus);
+  const isAuthenticated = true;
+
   return (
     <ConnectedRouter history={history}>
       <Switch>
@@ -37,9 +38,10 @@ const AppRouter: React.FC<IRouter> = ({ history }) => {
         {/* Home page */}
         <PrivateRoute
           path="/"
+          exact
           history={history}
           component={HomePage}
-          isAuthenticated
+          isAuthenticated={isAuthenticated}
         />
 
         {/* 404 */}

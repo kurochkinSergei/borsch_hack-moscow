@@ -1,19 +1,26 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import Cookie from 'js-cookie';
 
 import { Sidebar, IconButton } from 'storybook-directual';
+import { SESSION_ID } from 'utils/constants';
+import { logout as logoutAC } from 'redux/stores/user/actions';
 
-// eslint-disable-next-line arrow-body-style
 const AppManagementSideBar = () => {
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(logoutAC());
+    Cookie.remove(SESSION_ID);
+  };
+
   return (
     <Sidebar
       navList={[
         <IconButton
-          icon="user"
+          icon="logout"
           key="0"
-        />,
-        <IconButton
-          icon="settings"
-          key="1"
+          onClick={logout}
         />,
       ]}
     />

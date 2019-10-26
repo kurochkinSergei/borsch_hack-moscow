@@ -5,3 +5,34 @@ html, body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
 }
+:root {
+  --color-black: 34,34,34;
+  --color-gray: 142,142,142;
+  --color-white: 255,255,255;
+
+  --color-accent: 24,144,255;
+  --color-secondary: 13,45,83;
+
+  --color-green: 38,190,153;
+  --color-orange: 236,169,16;
+  --color-red: 237,95,95;
+}
+
+[data-theme="dark"] {
+  --color-black: 255,255,255;
+  --color-gray: 142,142,142;
+  --color-white: 34,34,34;
+
+  --color-accent: 90,90,151;
+  /* --color-secondary: 244,228,73; */
+  --color-secondary: 237,31,36;
+
+  --color-green: 8,74,2;
+  --color-orange: 149,100,14;
+  --color-red: 95,0,0;
+}
+
+#root {
+  min-height: 100vh;
+  background-color: rgb(var(--color-white));
+}
