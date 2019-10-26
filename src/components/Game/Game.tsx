@@ -41,7 +41,7 @@ const prepareData = (data: any) => {
 
 const Game = () => {
   const [round, setRound] = useState<number>(1);
-  const [roundStarted, startRound] = useState<boolean>(true);
+  const [roundStarted, startRound] = useState<boolean>(false);
   const [officialData, setOfficialData] = useState<TDataPrepared | null>(null);
   const [score, setScore] = useState<TScore>({
     user: 0,
@@ -67,7 +67,7 @@ const Game = () => {
               textAlign: 'center',
               fontSize: 36,
               width: '100%',
-              color: 'white',
+              color: 'rgb(237, 31, 36)',
             }}
             className="Mono_14-24_White"
           >

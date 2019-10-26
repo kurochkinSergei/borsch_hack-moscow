@@ -1,9 +1,8 @@
 .round-wrapper {
   & .person {
+    padding: 0 30px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row;
 
     & .person-image-wrapper {
       position: relative;
@@ -17,15 +16,35 @@
         font-size: 138px;
         position: absolute;
         top: -11px;
-        right: 91px;
+        right: 80px;
       }
     }
     & .person-desc {
       text-align: center;
       color: white !important;
       margin: 10px;
+      width: 300px;
 
       .person-name, .person-party, .person-region {
+        color: white;
+      }
+    }
+  }
+
+  .form {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-evenly;
+    width: 400px;
+    margin: 30px auto;
+  }
+
+
+  .info {
+    margin-left: 20px;
+    .info-row {
+      margin-bottom: 15px;
+      .title {
         color: white;
       }
     }
