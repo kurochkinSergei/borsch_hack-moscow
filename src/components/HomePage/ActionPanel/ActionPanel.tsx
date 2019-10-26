@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button, Select } from 'storybook-directual';
+import { Button } from 'storybook-directual';
 
 import './ActionPanel.scss';
+import { Link } from 'react-router-dom';
 
 
 const appFilterOptions = [
@@ -10,17 +11,14 @@ const appFilterOptions = [
 ];
 
 const ActionPanel = () => {
-  const initialValue = '';
-
   return (
     <div className="action-panel">
       <div className="app-filter-select action-panel__control">
-        <Select
-          placeholder="Hello there"
-          selected={initialValue}
-          options={appFilterOptions}
-          onChange={(key: string) => console.warn('key::::', key)}
-        />
+        <Link to="/play-game">
+          <Button>
+            NEW GAME
+          </Button>
+        </Link>
       </div>
     </div>
   );

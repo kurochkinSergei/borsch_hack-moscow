@@ -26,9 +26,9 @@ const PageLayout = ({
       {actionPanel}
     </div>
 
-    <aside className="sidebar-wrapper">
+    {/* <aside className="sidebar-wrapper">
       {sideBar}
-    </aside>
+    </aside> */}
 
     <div className="content-wrapper">
       {content}

@@ -16,3 +16,5 @@ export function authWithGoogle(credentials: any) {
   return axios.post('/auth/google', credentials).then(response => response.data)
     .catch(err => console.error(err));
 }
+
+

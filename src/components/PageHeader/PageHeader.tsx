@@ -29,7 +29,7 @@ const PageHeader = ({
   return (
     <header className="layout-header">
       <div className="header-title-wrapper">
-        <div className="Header_32-40_Black title">{title}</div>
+        <div className="Header_32-40_Black title" style={!withSearch ? { gridColumnEnd: 23, width: '100%'} : undefined}>{title}</div>
         {
           withSearch
           && (

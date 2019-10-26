@@ -12,6 +12,7 @@ import { ConnectedRouter } from 'connected-react-router';
 
 // Page components
 import HomePage from 'components/HomePage/HomePage';
+import Game from 'components/Game/Game';
 
 import Login from 'components/Login/Login';
 import PrivateRoute from './PrivateRoute';
@@ -41,6 +42,15 @@ const AppRouter: React.FC<IRouter> = ({ history }) => {
           exact
           history={history}
           component={HomePage}
+          isAuthenticated={isAuthenticated}
+        />
+
+        {/* Home page */}
+        <PrivateRoute
+          path="/play-game"
+          exact
+          history={history}
+          component={Game}
           isAuthenticated={isAuthenticated}
         />
 

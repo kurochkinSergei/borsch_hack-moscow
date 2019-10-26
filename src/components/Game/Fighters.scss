@@ -1,0 +1,56 @@
+@keyframes move-left{
+  from {left: -1000px;} 
+  to{ left: 100px; } 
+}
+
+@keyframes move-right {
+  from { right: -1000px; } 
+  to{ right: 100px; } 
+}
+
+.fight-button {
+  position: absolute;
+  top: 250px;
+  left: calc(50% - 100px);
+  & > button {
+    width: 200px;
+    height: 80px;
+    font-size: 36px;
+  }
+}
+
+.fighters {
+  width: 100%;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+
+  .fighter {
+    display: inline-block;
+    width: 300px;
+    position: absolute;
+    transition: all ease-in 1.5s;
+
+    > img {
+      width: 300px;
+    }
+
+    &_left {
+      left: -500px;
+
+      &.animate {
+        left: 150px;
+      }
+      // animation: move-left 5s;
+    }
+
+    &_right {
+      right: -500px;
+      // animation: move-right 5s;
+      transform: rotate(-15deg);
+      &.animate {
+        right: 150px;
+      }
+    }
+  }
+}
