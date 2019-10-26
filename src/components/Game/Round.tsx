@@ -3,6 +3,8 @@ import { get } from 'lodash';
 import 'react-typist/dist/Typist.css';
 
 import tuxedo from '../../static/sarkozy.png';
+import simple from '../../static/man-simple.png';
+// import king from '../../static/king.png';
 
 import './Round.scss';
 import { colors, Button, Input } from 'storybook-directual';
@@ -14,6 +16,7 @@ import prius from '../../static/cars/prius.png';
 // @ts-ignore
 import porsche from '../../static/cars/porsche.webp';
 import estate from '../../static/house.png';
+
 const cars = [
   jiga,
   jiga,
@@ -44,28 +47,11 @@ export const getRandomColor = (): { hex: string, name: string } => {
   return colors[colorsKeys[colorIndx]];
 };
 
-// const makeEstates = (data: any) => {
-//   if (!data) return '';
-
-//   return data.realEstates.map((flat: any) => 
-//     [
-//       get(flat, 'type.name', ''),
-//       get(flat, 'region.name', ''),
-//       `${get(flat, 'square', '')} square meters`
-//     ].filter(Boolean).join(', '))
-//   .join('; ')
-// }
-
-// const makeVehicles = (data: any) => {
-//   if (!data) return '';
-
-//   return data.vehicles.map((car: any) => 
-//     [
-//       get(car, 'type.name', ''),
-//       get(car, 'brand.name', ''),
-//     ].filter(Boolean).join(', '))
-//   .join('; ')
-// }
+const getPersonSrc = (value: number) => {
+  if (value < 100000) return simple;
+  if (value > 100000 && value < 200000) return tuxedo;
+  // if (value > 200000) return king;
+}
 
 const makeVehicles = (data: any) => {
   if (!data) return '';
@@ -116,6 +102,22 @@ const Round: React.FC<RoundProps> = ({ data }) => {
 
   return (
     <div className="round-wrapper">
+      <div className="results">
+        <div className="form">
+          <label>
+            <div style={{ color: 'white', margin: '5px 15px'}}>Enter public official income</div>
+            <Input
+              type="number"
+              value={value}
+              onChange={(event: any) => setValue(event.target.value)}
+            />
+          </label>
+          <Button onClick={() => {}}>
+            Confirm
+          </Button>
+        </div>
+      </div>
+      
       <div className="person">
         <div>
           <div
@@ -125,7 +127,7 @@ const Round: React.FC<RoundProps> = ({ data }) => {
               borderColor: color,
             }}
           >
-            <img src={tuxedo} alt="tuxedo"></img>
+            <img src={getPersonSrc(value)} alt="person"></img>
             {emojies[roundStatus]}
           </div>
           <div className="person-desc">
@@ -151,20 +153,6 @@ const Round: React.FC<RoundProps> = ({ data }) => {
             <div className="desc"></div>
           </div> */}
         </div>
-      </div>
-
-      <div className="form">
-        <label>
-          <div style={{ color: 'white', margin: '5px 15px'}}>Enter public official income</div>
-          <Input
-            type="number"
-            value={value}
-            onChange={(event: any) => setValue(event.target.value)}
-          />
-        </label>
-        <Button onClick={() => {}}>
-          Confirm
-        </Button>
       </div>
     </div>
   )

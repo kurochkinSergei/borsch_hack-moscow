@@ -74,7 +74,7 @@ const Game = () => {
             className="Mono_14-24_White"
           >
             <HealthBar score={score.user} name="Player 1" player={1} />
-            <HealthBar score={score.machine} name="FEDOR THE MACHINE" player={2} />
+            <HealthBar score={score.machine} name="FEDOR THE MACHINE" player={2}/>
             ROUND {round}
           </div>}
         />
