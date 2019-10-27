@@ -8,7 +8,6 @@ import PageLayout from '../PageLayout/PageLayout';
 import Header from '../PageHeader/PageHeader';
 
 import SideBar from './SideBar/SideBar';
-import styles from './HomePage.module.scss';
 
 import { Button } from 'storybook-directual';
 import { Link } from 'react-router-dom';
@@ -43,13 +42,15 @@ const HomePage = () => {
             fontSize: 24,
             textAlign: 'center',
             color: 'white',
-            height: 200,
+            height: 270,
           }}>
             <Typist>
-              Year 2019. The time has come<br></br>
-              to challange artifitial intelligence<br></br>
-              in a battle to determine<br></br>
-              real income of public officials
+              Year 2019. The time of <span style={{color: '#ed1f24'}}>CORRUPTION</span> KOMBAT has come.<br></br>
+              Best citizens were selected to challange<br></br>
+              artifitial intelligence to determine<br></br>
+              real income of public officials<br></br>
+              <br></br>
+              <span style={{color: '#ed1f24'}}>YOU ARE ONE OF THEM</span>
             </Typist>
           </h2>
           <div style={{display: 'block', margin: 'auto', width: 100}}>
