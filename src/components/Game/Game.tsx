@@ -65,10 +65,12 @@ const Game = () => {
     );
   }, [round]);
 
-  const gameOver = Math.abs(score.user - score.machine) >= 3;
+  const gameOver = score.user === 3 || score.machine === 3;
 
   const tryAgain = () => {
     startRound(false);
+    setRound(1);
+
     setScore({
       user: 0,
       machine: 0,
