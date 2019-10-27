@@ -27,9 +27,7 @@ Try to win: http://134.209.94.143:8080/
 <p align="center">
   <img src="presentations/imgs/screen2.png" alt="screen2"/>
 </p>
-<p align="center">
-  <img src="presentations/imgs/screen3.png" alt="screen3"/>
-</p>
+
 
 ## Borsch crew
 
