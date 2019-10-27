@@ -11,7 +11,7 @@ interface TGameOverProps {
 }
 
 const HealthBar: React.FC<TGameOverProps> = ({ tryAgain, score }) => {
-  const isUserWon = (score.user - score.machine) >= 3;
+  const isUserWon = score.user === 3;
 
   return (
     <div className="game-over">

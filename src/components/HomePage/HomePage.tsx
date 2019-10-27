@@ -46,8 +46,8 @@ const HomePage = () => {
           }}>
             <Typist>
               Year 2019. The time of <span style={{color: '#ed1f24'}}>CORRUPTION</span> KOMBAT has come.<br></br>
-              Best citizens were selected to challange<br></br>
-              artifitial intelligence to determine<br></br>
+              Best citizens were selected to challenge<br></br>
+              artificial intelligence to determine<br></br>
               real income of public officials<br></br>
               <br></br>
               <span style={{color: '#ed1f24'}}>YOU ARE ONE OF THEM</span>

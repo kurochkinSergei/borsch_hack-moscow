@@ -146,11 +146,6 @@ const Round: React.FC<RoundProps> = ({ data, rawData, setScore, setRound }) => {
       });
 
       setStatus('result');
-      setScore(
-        Math.abs(yourDelta) <= Math.abs(robotDelta)
-        ? 'user'
-        : 'machine'
-      );
     });
   }
 
@@ -165,7 +160,14 @@ const Round: React.FC<RoundProps> = ({ data, rawData, setScore, setRound }) => {
           && <div className="result wrapper">
             <div className="correct Header_32-40_White">
               Correct answer: {Numbers.separate(result.y_true)}K&nbsp;
-              <Button onClick={setRound}>Continue</Button>
+              <Button onClick={() => {
+                setScore(
+                  Math.abs(result.yourDelta) <= Math.abs(result.robotDelta)
+                  ? 'user'
+                  : 'machine'
+                );
+                setRound()
+              }}>Continue</Button>
             </div>
             <div className="answers">
               <span className={Math.abs(result.yourDelta) <= Math.abs(result.robotDelta) ? 'right' : ''}>
