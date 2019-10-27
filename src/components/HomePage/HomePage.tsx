@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 // import { Icon, colors } from 'storybook-directual';
 import Typist from 'react-typist';
 import 'react-typist/dist/Typist.css';
 
-import { useDates } from 'providers/StorybookProvider/withDates';
 
 import PageLayout from '../PageLayout/PageLayout';
 import Header from '../PageHeader/PageHeader';
@@ -15,8 +14,6 @@ import { Button } from 'storybook-directual';
 import { Link } from 'react-router-dom';
 
 const HomePage = () => {
-  const Dates = useDates();
-
   return (
     <PageLayout
       header={(

@@ -219,7 +219,10 @@ const Round: React.FC<RoundProps> = ({ data, rawData, setScore, setRound }) => {
           <div className="person-desc">
             <div className="person-name Additional-Header_28-40_White">{data && data.name}</div>
             <div className="person-party Subheader_14-24_White">{data && data.partyName}</div>
-            <div className="person-region Subheader_14-24_White">{data && data.regionName}</div>
+            <div className="person-region Subheader_14-24_White">
+              {data && data.regionName},&nbsp;
+              {data && data.officeName}
+            </div>
           </div>
         </div>
 

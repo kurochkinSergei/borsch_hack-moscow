@@ -42,7 +42,7 @@ const prepareData = (data: any) => {
     partyName: get(data, 'main.party.name', 'NO PARTY'),
     realEstates: get(data, 'real_estates', []),
     vehicles: get(data, 'vehicles', []),
-    regionName: get(data, 'main.office.region.name', 'NO REGION')
+    regionName: get(data, 'main.office.region.name', 'NO REGION'),
   }
 }
 

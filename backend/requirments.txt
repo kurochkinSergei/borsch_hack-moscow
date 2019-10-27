@@ -1,0 +1,6 @@
+catboost
+flask
+flask_cors
+dill
+scikit-learn
+pandas
