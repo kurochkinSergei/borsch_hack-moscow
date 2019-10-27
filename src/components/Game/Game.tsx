@@ -9,6 +9,7 @@ import { Button } from 'storybook-directual';
 import Fighters from './Fighters';
 import HealthBar from '../HealthBar/HealthBar';
 import Round from './Round';
+import GameOver from './GameOver';
 import { getOfficialInfo } from 'client/http';
 
 type TScore = {
@@ -18,11 +19,11 @@ type TScore = {
 
 const officials = [
   // { id: 8, office: 14, year: 2010 }
-  { id: 10, office: 14, year: 2010 },
-  { id: 8, office: 14, year: 2010 },
-  { id: 9, office: 14, year: 2010 },
-  { id: 11, office: 14, year: 2010 },
-  { id: 12, office: 14, year: 2010 }
+  { id: 558, office: 124, year: 2018 },
+  { id: 562, office: 126, year: 2018 },
+  { id: 203, office: 123, year: 2018 },
+  { id: 21002, office: 1397, year: 2018 },
+  { id: 132632, office: 453, year: 2018 }
 ];
 
 export type TDataPrepared = {
@@ -41,7 +42,7 @@ const prepareData = (data: any) => {
     partyName: get(data, 'main.party.name', 'NO PARTY'),
     realEstates: get(data, 'real_estates', []),
     vehicles: get(data, 'vehicles', []),
-    regionName: get(data, 'main.office.region', 'NO REGION')
+    regionName: get(data, 'main.office.region.name', 'NO REGION')
   }
 }
 
@@ -63,6 +64,16 @@ const Game = () => {
       }
     );
   }, [round]);
+
+  const gameOver = Math.abs(score.user - score.machine) >= 3;
+
+  const tryAgain = () => {
+    startRound(false);
+    setScore({
+      user: 0,
+      machine: 0,
+    })
+  }
 
   return (
     <PageLayout
@@ -87,8 +98,11 @@ const Game = () => {
       content={(
         <>
         {
-          !roundStarted
-          ? <>
+          gameOver && <GameOver score={score} tryAgain={tryAgain}/>
+        }
+        {
+          !roundStarted && !gameOver
+          && <>
             <Fighters />
             <div className="score">
               {score.user}&nbsp;:&nbsp;{score.machine}
@@ -99,7 +113,11 @@ const Game = () => {
               </Button>
             </div>
           </>
-        : <Round
+        }
+        {
+        
+          roundStarted && !gameOver &&
+          <Round
           data={officialData}
           setRound={() => {
             setRound(round + 1)

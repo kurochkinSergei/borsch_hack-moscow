@@ -17,6 +17,11 @@ import prius from '../../static/cars/prius.png';
 // @ts-ignore
 import porsche from '../../static/cars/porsche.webp';
 import estate from '../../static/house.png';
+import kvartira from '../../static/kvartira.png';
+import garage from '../../static/garage.png';
+// @ts-ignore
+import land from '../../static/land.00_png_srz';
+
 import { useStorybook } from 'storybook-directual';
 import { requestScore } from 'client/http';
 
@@ -53,17 +58,17 @@ export const getRandomColor = (): { hex: string, name: string } => {
 };
 
 const getPersonSrc = (value: number) => {
-  if (value < 100000) return simple;
-  if (value >= 100000 && value < 200000) return tuxedo;
-  if (value > 200000) return king;
+  if (value < 100) return simple;
+  if (value >= 100 && value < 200) return tuxedo;
+  if (value > 200) return king;
 
   return simple;
 }
 
 const getPersonImgClass = (value: number) => {
-  if (value < 100000) return 'simple';
-  if (value >= 100000 && value < 200000) return 'tuxedo';
-  if (value > 200000) return 'king';
+  if (value < 100) return 'simple';
+  if (value >= 100 && value < 200) return 'tuxedo';
+  if (value > 200) return 'king';
 
   return 'simple';
 }
@@ -87,17 +92,34 @@ const makeVehicles = (data: any) => {
 const makeEstates = (data: any) => {
   if (!data) return '';
 
-  return data.realEstates.map((flat: any) => 
-    (
-      <div className="card">
-        <img className="car-img" src={estate}></img>
-        <div>
-        {get(flat, 'type.name', '')},{' '}
-        {get(flat, 'region.name', '')},{' '}
-        {get(flat, 'square', '')} m<sup>2</sup>
+  return data.realEstates.map((flat: any) => {
+    let src = estate;
+    const type = get(flat, 'type.id', '');
+    const share = get(flat, 'share', 0);
+    const relative = get(flat, 'relative', null);
+
+    if (type === 1) src = land;
+    if (type === 2) src = garage;
+    if (type === 4) src = kvartira;
+    if (type === 5 || type === 3 || type == 6) src = estate;
+
+    return (
+        <div className={`card ${relative ? 'relation' : ''}`}>
+          <div style={{ position: 'relative' }}>
+            <img className="car-img" src={src}></img>
+            {
+              share
+              && <div className="share" style={{ width: `${share * 100}%`}}></div>
+            }
+          </div>
+          <div style={{ background: 'rgb(34,34,34)'}}>
+            {get(flat, 'type.name', '')},{' '}
+            {get(flat, 'region.name', '')},{' '}
+            {get(flat, 'square', '')} m<sup>2</sup>
+          </div>
         </div>
-      </div>
-    ));
+      )
+  });
 }
 
 const Round: React.FC<RoundProps> = ({ data, rawData, setScore, setRound }) => {
@@ -109,11 +131,8 @@ const Round: React.FC<RoundProps> = ({ data, rawData, setScore, setRound }) => {
   const { Numbers } = useStorybook();
 
   const onConfirm = () => {
-    console.log('VALYE::', value);
-    console.log('raw data', rawData);
-
     requestScore(rawData).then(result => {
-      console.log('result:::', result);
+      if (!result) return;
       const { y_predict, y_true } = result;
 
       const robotDelta = Math.round((y_predict - y_true) / 1000);
@@ -127,12 +146,11 @@ const Round: React.FC<RoundProps> = ({ data, rawData, setScore, setRound }) => {
       });
 
       setStatus('result');
-      setScore(result.yourDelta <= result.robotDelta ? 'user' : 'machine');
-      //   setRound();
-      // setTimeout(() => {
-      //   setScore('user');
-      //   setRound();
-      // }, 5000);
+      setScore(
+        Math.abs(yourDelta) <= Math.abs(robotDelta)
+        ? 'user'
+        : 'machine'
+      );
     });
   }
 
@@ -147,7 +165,7 @@ const Round: React.FC<RoundProps> = ({ data, rawData, setScore, setRound }) => {
           && <div className="result wrapper">
             <div className="correct Header_32-40_White">
               Correct answer: {Numbers.separate(result.y_true)}K&nbsp;
-              <Button onClick={setRound}>Next round</Button>
+              <Button onClick={setRound}>Continue</Button>
             </div>
             <div className="answers">
               <span className={Math.abs(result.yourDelta) <= Math.abs(result.robotDelta) ? 'right' : ''}>
@@ -166,7 +184,7 @@ const Round: React.FC<RoundProps> = ({ data, rawData, setScore, setRound }) => {
         <div className="form" style={roundStatus === 'result' ? { display: 'none' } : undefined}>
           <label>
             <div style={{ color: 'white', margin: '5px 15px'}}>
-              Mounthly salary {Numbers.separate(value)}K ₽
+              Mounthly income {Numbers.separate(value * 1000)} ₽
             </div>
             <Input
               type="number"

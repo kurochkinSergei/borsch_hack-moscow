@@ -88,6 +88,12 @@
       & .card {
         width: 160px;
         margin-right: 10px;
+        margin-bottom: 10px;
+
+        &.relation {
+          opacity: 0.5;
+          // display: none;
+        }
       }
     }
     .car-img {
@@ -130,5 +136,27 @@
     .right {
       color: rgb(18,152,2);
     }
+  }
+
+  .share {
+    width: 25%;
+    height: 120px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: gray;
+    opacity: 0.5;
+  }
+}
+
+.game-over {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .Header_32-40_White {
+    color: white;
+    margin-bottom: 50px;
   }
 }
