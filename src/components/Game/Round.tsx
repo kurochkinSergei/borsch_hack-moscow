@@ -12,10 +12,6 @@ import { colors, Button, Input } from 'storybook-directual';
 import { TDataPrepared } from './Game';
 
 import jiga from '../../static/cars/jiga.png';
-// import niva from '../../static/cars/niva.jpg';
-import prius from '../../static/cars/prius.png';
-// @ts-ignore
-import porsche from '../../static/cars/porsche.webp';
 import estate from '../../static/house.png';
 import kvartira from '../../static/kvartira.png';
 import garage from '../../static/garage.png';
@@ -25,17 +21,6 @@ import land from '../../static/land.00_png_srz';
 import { useStorybook } from 'storybook-directual';
 import { requestScore } from 'client/http';
 
-const cars = [
-  jiga,
-  // jiga,
-  // jiga,
-  // jiga,
-  // jiga,
-  // jiga,
-  // // niva,
-  // prius,
-  // porsche,
-]
 
 const emojies: { [key: string]: any} = {
   simple: <span className="face">😐</span>,
@@ -60,7 +45,7 @@ export const getRandomColor = (): { hex: string, name: string } => {
 const getPersonSrc = (value: number) => {
   if (value < 100) return simple;
   if (value >= 100 && value < 200) return tuxedo;
-  if (value > 200) return king;
+  if (value >= 200) return king;
 
   return simple;
 }
@@ -68,7 +53,7 @@ const getPersonSrc = (value: number) => {
 const getPersonImgClass = (value: number) => {
   if (value < 100) return 'simple';
   if (value >= 100 && value < 200) return 'tuxedo';
-  if (value > 200) return 'king';
+  if (value >= 200) return 'king';
 
   return 'simple';
 }
@@ -136,7 +121,7 @@ const Round: React.FC<RoundProps> = ({ data, rawData, setScore, setRound }) => {
       const { y_predict, y_true } = result;
 
       const robotDelta = Math.round((y_predict - y_true) / 1000);
-      const yourDelta = Math.round((value*1000 - y_true) / 1000);
+      const yourDelta = Math.round((value - y_true) / 1000);
 
       setResult({
         y_predict: Math.round(y_predict / 1000),
@@ -171,7 +156,7 @@ const Round: React.FC<RoundProps> = ({ data, rawData, setScore, setRound }) => {
             </div>
             <div className="answers">
               <span className={Math.abs(result.yourDelta) <= Math.abs(result.robotDelta) ? 'right' : ''}>
-                Your answer: {Numbers.separate(value)}K&nbsp;
+                Your answer: {Numbers.separate(value / 1000)}K&nbsp;
                 ({result.yourDelta < 0 ? '-' : '+'}
                 {Numbers.separate(Math.abs(result.yourDelta))}
                 K)
@@ -186,7 +171,7 @@ const Round: React.FC<RoundProps> = ({ data, rawData, setScore, setRound }) => {
         <div className="form" style={roundStatus === 'result' ? { display: 'none' } : undefined}>
           <label>
             <div style={{ color: 'white', margin: '5px 15px'}}>
-              Mounthly income {Numbers.separate(value * 1000)} ₽
+              Mounthly income {Numbers.separate(value)} ₽
             </div>
             <Input
               type="number"
@@ -210,10 +195,6 @@ const Round: React.FC<RoundProps> = ({ data, rawData, setScore, setRound }) => {
         <div>
           <div
             className={`person-image-wrapper ${getPersonImgClass(value)}`}
-            // style={{
-            //   background: color,
-            //   borderColor: color,
-            // }}
           >
             <img src={getPersonSrc(value)} alt="person"></img>
             {emojies[getPersonImgClass(value)]}

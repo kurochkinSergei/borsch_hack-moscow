@@ -46,35 +46,60 @@ const prepareData = (data: any) => {
   }
 }
 
+const getRandomOfficials = (data: any[]) => {
+  const ROUNDS = 5;
+  const res = [];
+
+  let indexes = data.map((item, index) => index);
+
+  for (let i = 0; i < ROUNDS; i += 1) {
+    const randIndex = Math.floor(Math.random() * (indexes.length));
+    res.push(data[indexes[randIndex]]);
+    indexes = indexes.filter((index, idx) => (idx !== randIndex));
+  } return res;
+};
+
 const Game = () => {
   const [round, setRound] = useState<number>(1);
+  const [tryN, setTryN] = useState(0);
   const [roundStarted, startRound] = useState<boolean>(false);
   const [officialData, setOfficialData] = useState<TDataPrepared | null>(null);
   const [rawData, setRawData] = useState<TDataPrepared | null>(null);
+  const [officialsData, setOfficialsData] = useState(officials);
+
   const [score, setScore] = useState<TScore>({
     user: 0,
     machine: 0,
   });
 
+
   useEffect(() => {
-    getOfficialInfo(officials[round - 1]).then(
-      (result) => {
-        setRawData(result)
-        setOfficialData(prepareData(result));
-      }
-    );
-  }, [round]);
+    setOfficialsData(getRandomOfficials(officials));
+   }, [tryN]);
+ 
+   useEffect(() => {
+     const official = officialsData[round - 1];
+     if (!official) return;
+
+     getOfficialInfo(official).then(
+       (result) => {
+         setRawData(result)
+         setOfficialData(prepareData(result));
+       }
+     );
+   }, [round, officialsData]);
 
   const gameOver = score.user === 3 || score.machine === 3;
 
   const tryAgain = () => {
     startRound(false);
     setRound(1);
+    setTryN(tryN + 1);
 
     setScore({
       user: 0,
       machine: 0,
-    })
+    });
   }
 
   return (

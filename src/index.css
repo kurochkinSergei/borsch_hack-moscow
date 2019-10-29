@@ -3,8 +3,10 @@
 html, body {
   margin: 0;
   padding: 0;
+  background-color: rgb(34, 34, 34);
   -webkit-font-smoothing: antialiased;
 }
+
 :root {
   --color-black: 34,34,34;
   --color-gray: 142,142,142;
