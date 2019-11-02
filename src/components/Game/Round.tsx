@@ -43,17 +43,17 @@ export const getRandomColor = (): { hex: string, name: string } => {
 };
 
 const getPersonSrc = (value: number) => {
-  if (value < 100) return simple;
-  if (value >= 100 && value < 200) return tuxedo;
-  if (value >= 200) return king;
+  if (value < 100000) return simple;
+  if (value >= 100000 && value < 200000) return tuxedo;
+  if (value >= 200000) return king;
 
   return simple;
 }
 
 const getPersonImgClass = (value: number) => {
-  if (value < 100) return 'simple';
-  if (value >= 100 && value < 200) return 'tuxedo';
-  if (value >= 200) return 'king';
+  if (value < 100000) return 'simple';
+  if (value >= 100000 && value < 200000) return 'tuxedo';
+  if (value >= 200000) return 'king';
 
   return 'simple';
 }

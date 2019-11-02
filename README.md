@@ -6,18 +6,19 @@ By Borsch crew
 
 -------------------
 
-## App for social Goods
-
-Society knows too little about those who run the state. Government reports and statistics do not reveal comprehensive information on costs of state machinery to citizens
-
-So, Anti-corruption declarations can be used to directly acquaint citizens with the property status of officials through the game
-
-
 ## Game
 
-Best citizens were selected to challenge artificial intelligence to determine real income of public officials. 
+Interactive web-app game based on [declarations data](https://declarator.org/opendata/). Fight against AI (based on ML) by guessing public officials annual income. The more accurate you are the more chances you have to win.
 
-Try to win: http://134.209.94.143:8080/
+Try to win now --> http://134.209.94.143:8080/
+
+
+## App for Social Goods
+
+Society knows too little about those who run the state. Government reports and statistics do not reveal comprehensive information on costs of state machinery to citizens.
+
+So, Anti-corruption declarations can be used to directly acquaint citizens with the property status of officials through the game.
+
 
 ## Screenshoots
 
